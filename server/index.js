@@ -17,6 +17,8 @@ const mostSoldItemRoutes = require('./routes/mostSoldItem');
 const metricsRoutes = require('./routes/metrics');
 const createOrders = require('./models/createOrder');
 const { User } = require('./models/user');
+const Item = require('./models/items');
+
 
 
 //database connection
@@ -36,6 +38,7 @@ app.use("/api/rawMaterial", rawMaterialRoutes);
 app.use("/api/finishedProducts", finishedProductsRoutes);
 app.use("/api/sales", salesRouter);
 app.use("/api/metrics", metricsRoutes)
+
 
 
 
@@ -71,103 +74,151 @@ app.get('/api/sales', async (req, res) => {
     }
   });
   
-  app.get('/api/raw-materials', async (req, res) => {
-    try {
-      const materials = await rawMaterials.aggregate([
-        { $group: { _id: '$type', totalQuantity: { $sum: '$quantity' } } },
-        { $project: { _id: 0, type: '$_id', totalQuantity: 1 } }
-      ]);
+  // app.get('/api/raw-materials', async (req, res) => {
+  //   try {
+  //     const materials = await rawMaterials.aggregate([
+  //       { $group: { _id: '$type', totalQuantity: { $sum: '$quantity' } } },
+  //       { $project: { _id: 0, type: '$_id', totalQuantity: 1 } }
+  //     ]);
   
-      res.json(materials);
-    } catch (error) {
-      res.status(500).json({ message: 'Failed to fetch raw materials data' });
-    }
-  });
+  //     res.json(materials);
+  //   } catch (error) {
+  //     res.status(500).json({ message: 'Failed to fetch raw materials data' });
+  //   }
+  // });
   
-  app.get('/api/most-sold-item', async (req, res) => {
-    try {
-      const mostSoldItem = await createOrders.aggregate([
-        { $unwind: '$items' },
-        { $group: { _id: '$items.itemName', totalQuantity: { $sum: '$items.quantity' } } },
-        { $sort: { totalQuantity: -1 } },
-        { $limit: 1 }
-      ]);
+  // app.get('/api/most-sold-item', async (req, res) => {
+  //   try {
+  //     const mostSoldItem = await createOrders.aggregate([
+  //       { $unwind: '$items' },
+  //       { $group: { _id: '$items.itemName', totalQuantity: { $sum: '$items.quantity' } } },
+  //       { $sort: { totalQuantity: -1 } },
+  //       { $limit: 1 }
+  //     ]);
   
-      res.json(mostSoldItem[0] || { itemName: 'N/A', totalQuantity: 0 });
-    } catch (error) {
-      res.status(500).json({ message: 'Failed to fetch most sold item data' });
-    }
-  });
+  //     res.json(mostSoldItem[0] || { itemName: 'N/A', totalQuantity: 0 });
+  //   } catch (error) {
+  //     res.status(500).json({ message: 'Failed to fetch most sold item data' });
+  //   }
+  // });
   
 
-  // In your Express app
-app.get('/api/metrics', async (req, res) => {
-  try {
-    // Fetch your metrics data here
-    const totalCustomers = await getTotalCustomers();
-    const salesToday = await getSalesToday();
-    const monthlySales = await getMonthlySales();
-    const yearlySales = await getYearlySales();
+//   // In your Express app
+// app.get('/api/metrics', async (req, res) => {
+//   try {
+//     // Fetch your metrics data here
+//     const totalCustomers = await getTotalCustomers();
+//     const salesToday = await getSalesToday();
+//     const monthlySales = await getMonthlySales();
+//     const yearlySales = await getYearlySales();
 
-    res.json({
-      totalCustomers,
-      salesToday,
-      monthlySales,
-      yearlySales
-    });
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch metrics data' });
-  }
-});
+//     res.json({
+//       totalCustomers,
+//       salesToday,
+//       monthlySales,
+//       yearlySales
+//     });
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch metrics data' });
+//   }
+// });
 
 app.get('/api/customers/total', async (req, res) => {
   try {
     const totalCustomers = await User.countDocuments();
     res.json({ total: totalCustomers });
   } catch (err) {
-    console.error('Error fetching total customers:', err);
     res.status(500).json({ message: 'Error fetching total customers' });
   }
 });
 
 app.get('/api/sales/summary', async (req, res) => {
   try {
-    // Define the start of the current month and year
-    const now = new Date();
-    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-    const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    const startOfYear = new Date(now.getFullYear(), 0, 1);
-    const endOfYear = new Date(now.getFullYear() + 1, 0, 1);
-
     // Total Sales
-    const totalSalesResult = await createOrders.aggregate([
+    const totalSales = await createOrders.aggregate([
       { $unwind: "$items" },
       { $group: { _id: null, totalSales: { $sum: { $multiply: ["$items.quantity", "$items.price"] } } } }
     ]);
-    const totalSales = totalSalesResult.length > 0 ? totalSalesResult[0].totalSales : 0;
+    const total = totalSales.length > 0 ? totalSales[0].totalSales : 0;
 
     // Monthly Sales
-    const monthlySalesResult = await createOrders.aggregate([
+    const monthlySales = await createOrders.aggregate([
       { $unwind: "$items" },
-      { $match: { orderDate: { $gte: startOfMonth, $lte: endOfMonth } } },
+      { $match: { orderDate: { $gte: new Date(new Date().getFullYear(), new Date().getMonth(), 1) } } },
       { $group: { _id: null, monthlySales: { $sum: { $multiply: ["$items.quantity", "$items.price"] } } } }
     ]);
-    const monthlySales = monthlySalesResult.length > 0 ? monthlySalesResult[0].monthlySales : 0;
+    const monthly = monthlySales.length > 0 ? monthlySales[0].monthlySales : 0;
 
     // Yearly Sales
-    const yearlySalesResult = await createOrders.aggregate([
+    const yearlySales = await createOrders.aggregate([
       { $unwind: "$items" },
-      { $match: { orderDate: { $gte: startOfYear, $lt: endOfYear } } },
+      { $match: { orderDate: { $gte: new Date(new Date().getFullYear(), 0, 1) } } },
       { $group: { _id: null, yearlySales: { $sum: { $multiply: ["$items.quantity", "$items.price"] } } } }
     ]);
-    const yearlySales = yearlySalesResult.length > 0 ? yearlySalesResult[0].yearlySales : 0;
+    const yearly = yearlySales.length > 0 ? yearlySales[0].yearlySales : 0;
 
-    res.json({ totalSales, monthlySales, yearlySales });
+    res.json({ totalSales: total, monthlySales: monthly, yearlySales: yearly });
   } catch (err) {
-    console.error('Error fetching sales summary:', err);
     res.status(500).json({ message: 'Error fetching sales summary' });
   }
 });
+
+app.get('/api/sales/data', async (req, res) => {
+  try {
+    const salesData = await createOrders.aggregate([
+      { $unwind: "$items" },
+      { $group: { _id: { $dateToString: { format: "%Y-%m-%d", date: "$orderDate" } }, totalSales: { $sum: { $multiply: ["$items.quantity", "$items.price"] } } } },
+      { $sort: { _id: 1 } } // Sort by date
+    ]);
+
+    res.json(salesData);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching sales data' });
+  }
+});
+
+app.get('/api/purchases/data', async (req, res) => {
+  try {
+    const itemsPurchased = await createOrders.aggregate([
+      { $unwind: "$items" }, // Deconstructs the items array
+      { $group: { _id: "$items.itemName", totalQuantity: { $sum: "$items.quantity" } } },
+      { $sort: { totalQuantity: -1 } } // Sort by most purchased
+    ]);
+
+    res.json(itemsPurchased);
+  } catch (err) {
+    res.status(500).json({ message: 'Error fetching purchase data' });
+  }
+});
+
+app.get('/api/sales/pie', async (req, res) => {
+  try {
+    const items = await createOrders.aggregate([
+      { $unwind: "$items" },
+      {
+        $group: {
+          _id: "$items.itemName",
+          totalQuantity: { $sum: "$items.quantity" }
+        }
+      },
+      { $sort: { totalQuantity: -1 } }
+    ]);
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Example API route for fetching finished products
+app.get('/api/finished-products', async (req, res) => {
+  try {
+    const finishedProducts = await Item.find();
+    res.status(200).json(finishedProducts);
+  } catch (error) {
+    res.status(500).json({ error: 'Error fetching finished products' });
+  }
+});
+
 
 
 

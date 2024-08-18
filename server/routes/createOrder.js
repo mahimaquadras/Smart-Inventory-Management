@@ -80,6 +80,19 @@ updateData().then(() => {
   console.log('Data update complete');
 });
 
+router.get('/items', async (req, res) => {
+  try {
+    const items = await Order.aggregate([
+      { $unwind: '$items' },
+      { $group: { _id: '$items.itemName', quantity: { $sum: '$items.quantity' } } },
+      { $project: { _id: 0, itemName: '$_id', quantity: 1 } },
+    ]);
+    res.json(items);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 
 
 

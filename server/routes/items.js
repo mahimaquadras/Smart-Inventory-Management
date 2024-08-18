@@ -32,4 +32,32 @@ router.get('/itemName', async (req, res) => {
   }
 });
 
+// router.get('/finished-products', async (req, res) => {
+//   try {
+//     const finishedProducts = await Item.find({});
+//     res.json(finishedProducts);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Failed to fetch finished products' });
+//   }
+// });
+
+router.put('/update/:id', async (req, res) => {
+  try {
+    const { id } = req.params; // This will be the _id of the item
+    const { qntyAvailable } = req.body;
+    
+    // Find the item by _id and update the quantity
+    const item = await Item.findByIdAndUpdate(id, { qntyAvailable }, { new: true });
+
+    if (!item) {
+      return res.status(404).json({ message: 'Item not found' });
+    }
+
+    res.status(200).json(item);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 module.exports = router;
