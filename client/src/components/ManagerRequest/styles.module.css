@@ -1,0 +1,179 @@
+/* src/pages/ManagerDashboard.module.css */
+
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f8;
+}
+
+.mainContent {
+    flex: 1;
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.title {
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.section {
+    margin: 30px 0;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    color: #555;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.error {
+    color: #e74c3c;
+    background-color: #fceaea;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    animation: shake 0.5s;
+}
+
+.success {
+    color: #27ae60;
+    background-color: #eafaf1;
+    border: 1px solid #a3d4b5;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s;
+}
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.spinner {
+    font-size: 2.5rem;
+    color: #3498db;
+    animation: spin 1s linear infinite;
+}
+
+.requestsTable {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.requestsTable th, .requestsTable td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.requestsTable th {
+    background-color: #f9f9f9;
+    font-weight: bold;
+}
+
+.requestsTable tr:hover {
+    background-color: #f1f1f1;
+}
+
+.actionButton {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin-right: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.approve {
+    background-color: #28a745;
+}
+
+.approve:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+.reject {
+    background-color: #dc3545;
+}
+
+.reject:hover {
+    background-color: #c82333;
+    transform: scale(1.05);
+}
+
+.Pending {
+    background-color: #fff;
+}
+
+.Approved {
+    background-color: #e6ffed;
+}
+
+.Rejected {
+    background-color: #ffe6e6;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .mainContent {
+        margin-left: 0;
+    }
+
+    .requestsTable th, .requestsTable td {
+        padding: 8px 10px;
+    }
+
+    .actionButton {
+        padding: 6px 10px;
+        margin-bottom: 5px;
+    }
+}

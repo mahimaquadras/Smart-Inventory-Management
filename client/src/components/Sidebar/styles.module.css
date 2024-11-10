@@ -1,0 +1,42 @@
+
+ .header {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .title {
+    margin-left: 10px;
+  }
+  
+  .listItem {
+    transition: all 0.3s;
+  }
+  
+  .MuiListItemIcon-root {
+    min-width: 40px; 
+  }
+  
+  .MuiListItemText-root {
+    margin-left: 10px;
+  }
+  
+  /* Style for collapsed sidebar */
+   .MuiDrawer-paper {
+    transition: width 0.3s;
+  }
+  
+  /* Responsive adjustments */
+   @media (max-width: 768px) {
+    .header {
+      display: flex;
+      justify-content: center;
+    }
+  }
+
+  
+    
+
+   

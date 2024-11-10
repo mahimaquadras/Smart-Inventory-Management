@@ -1,0 +1,82 @@
+/* Dashboard.module.css */
+
+.dashboard {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.widgetContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.widget {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.chartContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.lineChart, .pieChart {
+  flex: 1;
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.pieChart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensures that the pie chart does not overflow its container */
+}
+
+.pieChart h3 {
+  margin-bottom: 20px; /* Adds space between header and chart */
+}
+
+/* Ensure the pie chart is not blurred */
+.pieChart svg {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* Dashboard.module.css */
+.finishedProductsList {
+  margin-top: 20px;
+}
+
+.finishedProductsList ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.finishedProductsList li {
+  padding: 10px;
+  font-size: 1.2em;
+}
+
+.finishedProductsList li:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+
+.finishedProductsList li:nth-child(even) {
+  background-color: #e9e9e9;
+}
+
+.finishedProductsList li span {
+  color: red;
+  font-weight: bold;
+}
+

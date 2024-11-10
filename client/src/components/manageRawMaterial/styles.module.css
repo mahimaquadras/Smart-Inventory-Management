@@ -1,0 +1,181 @@
+
+.container {
+    padding: 20px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.title {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.sectionTitle {
+    font-size: 1.6rem;
+    color: #555;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.requestSection, .requestsSection {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.formGroup label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.formGroup input, .formGroup textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.formGroup input:focus, .formGroup textarea:focus {
+    border-color: #3498db;
+    outline: none;
+}
+
+.submitButton {
+    padding: 12px 20px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submitButton:hover {
+    background-color: #2980b9;
+    transform: scale(1.02);
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.error {
+    color: #e74c3c;
+    background-color: #fceaea;
+    border: 1px solid #f5c6cb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    animation: shake 0.5s;
+}
+
+.success {
+    color: #27ae60;
+    background-color: #eafaf1;
+    border: 1px solid #a3d4b5;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    animation: fadeIn 0.5s;
+}
+
+.requestsList {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.requestCard {
+    background-color: #f9f9f9;
+    border-left: 5px solid #3498db;
+    padding: 15px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.requestCard:hover {
+    background-color: #f1f1f1;
+}
+
+.requestTitle {
+    font-size: 1.3rem;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .form {
+        gap: 10px;
+    }
+
+    .submitButton {
+        width: 100%;
+    }
+
+    .requestCard {
+        padding: 10px 15px;
+    }
+}

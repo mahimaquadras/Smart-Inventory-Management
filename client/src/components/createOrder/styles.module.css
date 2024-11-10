@@ -1,0 +1,97 @@
+.formContainer {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ffffff; /* Clean white background */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: block;
+    font-size: 18px;
+    color: #333; /* Dark text color */
+    margin-bottom: 5px;
+  }
+  
+  .formGroup input,
+  .formGroup select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px; /* Rounded corners for inputs */
+    border: 1px solid #ddd; /* Light border */
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease; /* Smooth transition */
+  }
+  
+  .formGroup input:focus,
+  .formGroup select:focus {
+    border-color: #3498db; /* Highlight border on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  .tableContainer {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: collapse; /* Remove default spacing between table cells */
+  }
+  
+  .table {
+    width: 100%;
+    border: 1px solid #ddd; /* Light border around the table */
+  }
+  
+  .table th,
+  .table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd; /* Border between rows */
+  }
+  
+  .table th {
+    background-color: #f4f4f4; /* Light gray background for headers */
+    color: #333; /* Dark text color for headers */
+    font-size: 18px;
+  }
+  
+  .table td input,
+  .table td select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px; /* Rounded corners for inputs and selects */
+    border: 1px solid #ddd; /* Light border */
+    font-size: 16px;
+  }
+  
+  .table td input:focus,
+  .table td select:focus {
+    border-color: #3498db; /* Blue border color on focus */
+    outline: none; /* Remove default outline */
+  }
+  
+  button {
+    background-color: #3498db; /* Bright blue button */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+  }
+  
+  button:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+  }
+  
+  .error {
+    color: #e74c3c; /* Bright red for error messages */
+    margin-top: 10px;
+  }
+  

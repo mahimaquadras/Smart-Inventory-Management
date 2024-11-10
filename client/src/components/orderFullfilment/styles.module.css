@@ -1,0 +1,134 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    min-height: 100vh;
+  }
+  
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 32px;
+    font-weight: bold;
+  }
+  
+  
+  .orderCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: transform 0.3s ease;
+  }
+  
+  .orderCard:hover {
+    transform: scale(1.02);
+  }
+  
+  
+  .orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 10px;
+  }
+  
+  .orderHeader h2 {
+    margin: 0;
+    color: #333;
+    font-size: 20px;
+  }
+  
+  .orderHeader p {
+    margin: 0;
+    font-size: 14px;
+    color: #777;
+  }
+  
+  
+  .orderItems {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .orderItems li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    color: #555;
+  }
+  
+  .orderItems li:last-child {
+    border-bottom: none;
+  }
+  
+  
+  .orderFooter {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  
+  .orderFooter p {
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+  }
+  
+  
+  .statusBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .statusBtn:hover {
+    transform: scale(1.05);
+  }
+  
+  .statusBtn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  
+  .statusBtn.in-progress {
+    background-color: #FFC107;
+  }
+  
+  .statusBtn.completed {
+    background-color: #4CAF50;
+  }
+  
+  .statusBtn.ready-for-pickup {
+    background-color: #FF5722;
+  }
+  
+
+  .statusBtn.in-progress:hover {
+    background-color: #ff9e00;
+  }
+  
+  .statusBtn.completed:hover {
+    background-color: #45a049;
+  }
+  
+  .statusBtn.ready-for-pickup:hover {
+    background-color: #e64a19;
+  }
+  

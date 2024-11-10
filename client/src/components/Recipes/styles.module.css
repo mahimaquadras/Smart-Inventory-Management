@@ -1,0 +1,145 @@
+Container for the Recipe Management
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    font-family: 'Lora', serif;
+    background-color: #fdfdfd;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    animation: fadeIn 1s ease-in-out;
+    position: relative;
+}
+
+.title {
+    text-align: center;
+    font-size: 3rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 40px;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.recipeList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.recipeCard {
+    background-color: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.recipeCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
+}
+
+.recipeName {
+    font-size: 1.6rem;
+    color: #34495e;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.imageWrapper {
+    position: relative;
+    height: 250px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-radius: 15px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.recipeImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.recipeImage:hover {
+    transform: scale(1.1);
+}
+
+.recipeDetails {
+    text-align: left;
+    padding: 0 10px;
+    color: #7f8c8d;
+}
+
+.recipeDetails ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.recipeDetails li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.loadingText {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #3498db;
+    animation: blink 1s infinite;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+}
