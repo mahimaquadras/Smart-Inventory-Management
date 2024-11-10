@@ -1,4 +1,4 @@
-// src/pages/ManageRawMaterials.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
@@ -17,7 +17,7 @@ const ManageRawMaterials = () => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:8090/api/rawMaterialRequest');
+                const response = await axios.get('https://smart-inventory-management-api.onrender.com/api/rawMaterialRequest');
                 setRequests(response.data.requests);
             } catch (err) {
                 console.error('Error fetching raw material requests:', err);
@@ -37,7 +37,7 @@ const ManageRawMaterials = () => {
         setSuccess(null);
 
         try {
-            const response = await axios.post('http://localhost:8090/api/rawMaterialRequest', {
+            const response = await axios.post('https://smart-inventory-management-api.onrender.com/api/rawMaterialRequest', {
                 materialName,
                 requestedQuantity: Number(requestedQuantity),
                 notes
