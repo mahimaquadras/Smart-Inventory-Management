@@ -11,7 +11,7 @@ const RecipeManagement = () => {
 
     const fetchRecipes = async () => {
         try {
-            const response = await fetch('http://localhost:8090/api/recipes');
+            const response = await fetch('https://smart-inventory-management-api.onrender.com/api/recipes');
             const data = await response.json();
             console.log('Fetched recipes:', data);
             setRecipes(data);
