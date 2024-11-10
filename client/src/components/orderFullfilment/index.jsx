@@ -10,7 +10,7 @@ const OrderFulfillment = () => {
   
     const fetchOrders = async () => {
       try {
-        const response = await fetch('http://localhost:8090/api/createOrder');
+        const response = await fetch('https://smart-inventory-management-api.onrender.com/api/createOrder');
         const data = await response.json();
         setOrders(data.newOrders);
       } catch (error) {
@@ -20,7 +20,7 @@ const OrderFulfillment = () => {
   
     const updateStatus = async (orderId, status) => {
       try {
-        const response = await fetch(`http://localhost:8090/api/createOrder/${orderId}`, {
+        const response = await fetch(`https://smart-inventory-management-api.onrender.com/api/createOrder/${orderId}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ status }),
