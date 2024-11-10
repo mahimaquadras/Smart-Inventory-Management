@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import styles from './styles.module.css'; // Import your CSS module
+import styles from './styles.module.css'; 
 
 const FinishedProductForm = () => {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ const FinishedProductForm = () => {
   useEffect(() => {
     const fetchRawMaterialNames = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/rawMaterial/unique-names');
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/rawMaterial/unique-names');
         setRawMaterialNames(res.data);
       } catch (err) {
         setError('Failed to fetch raw material names');
@@ -24,7 +24,7 @@ const FinishedProductForm = () => {
 
     const fetchProductNames = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/items/itemName');
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/items/itemName');
         setProductNames(res.data);
       } catch (err) {
         setError('Failed to fetch product names');
@@ -46,13 +46,13 @@ const FinishedProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8090/api/finishedProducts', {
+      await axios.post('https://smart-inventory-management-api.onrender.com/api/finishedProducts', {
         name,
         rawMaterials
       });
       setName('');
       setRawMaterials([]);
-      setError(''); // Clear any previous error
+      setError(''); 
       toast.success('Finished product added successfully!');
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Failed to add finished product';
