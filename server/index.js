@@ -182,6 +182,6 @@ app.get('/api/finished-products', async (req, res) => {
 
 
 const port = process.env.PORT||8090;
-app.listen(port, () => {
-    console.log('Listening on port 8090')
-})
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Server is running on port ${port}`);
+});
