@@ -11,7 +11,7 @@ const Orders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/createOrder?page='+currentPage+'&limit=5', {
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/createOrder?page='+currentPage+'&limit=5', {
           params: { page: currentPage, limit: itemsPerPage }
         });
         console.log(res.data); 
