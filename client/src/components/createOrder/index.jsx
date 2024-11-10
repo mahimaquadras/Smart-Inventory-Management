@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './styles.module.css'; // Import your CSS module
-
+import styles from './styles.module.css';
 const OrderForm = () => {
   const [order, setOrder] = useState({
     customerName: '',
@@ -13,7 +12,7 @@ const OrderForm = () => {
   useEffect(() => {
     const fetchItems = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/items');
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/items');
         setItems(res.data);
       } catch (err) {
         console.error(err);
@@ -29,7 +28,7 @@ const OrderForm = () => {
     newItems[index].itemName = itemName;
 
     try {
-      const res = await axios.get(`http://localhost:8090/api/items/price/${itemName}`);
+      const res = await axios.get(`https://smart-inventory-management-api.onrender.com/api/items/price/${itemName}`);
       const itemPrice = res.data.price;
 
       // Calculate the total price based on the item price and quantity
@@ -47,7 +46,7 @@ const OrderForm = () => {
     const newItems = [...order.items];
     newItems[index].quantity = quantity;
 
-    // Ensure itemName is present before calculating the price
+   
     if (newItems[index].itemName) {
       const selectedItem = items.find(item => item.itemName === newItems[index].itemName);
       if (selectedItem) {
@@ -67,40 +66,39 @@ const OrderForm = () => {
     e.preventDefault();
     
     try {
-      // URL to submit the order
-      const url = "http://localhost:8090/api/createOrder";
+   
+      const url = "https://smart-inventory-management-api.onrender.com/api/createOrder";
   
-      // Update item quantities in the backend
       const updatedItems = order.items.map(async (orderItem) => {
         const selectedItem = items.find(i => i.itemName === orderItem.itemName);
   
-        // Check if there's enough stock
+       
         if (selectedItem.qntyAvailable < orderItem.quantity) {
           throw new Error(`Not enough stock for ${orderItem.itemName}`);
         }
   
-        // Update the quantity available in the backend
+        
         await axios.put(`http://localhost:8090/api/items/update/${selectedItem._id}`, {
           qntyAvailable: selectedItem.qntyAvailable - orderItem.quantity,
         });
       });
   
-      // Wait for all item updates to finish
+      
       await Promise.all(updatedItems);
   
-      // Submit the order
+      
       await axios.post(url, order);
   
-      // Redirect to home page or display success message
+     
       window.location = "/";
     } catch (error) {
-      // Log error details for debugging
+      
       console.error('Error during order submission:', error);
       if (error.response) {
-        // Handle error responses from the server
+       
         setError(error.response.data.message || 'An error occurred');
       } else {
-        // Handle other errors
+       
         setError(error.message || 'An unexpected error occurred');
       }
     }
