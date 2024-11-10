@@ -1,4 +1,4 @@
-// src/components/OrderCount.js
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
@@ -10,7 +10,7 @@ const OrderCount = () => {
   useEffect(() => {
     const fetchOrderCount = async () => {
       try {
-        const response = await axios.get('http://localhost:8090/api/orders/count');
+        const response = await axios.get('https://smart-inventory-management-api.onrender.com/api/orders/count');
         setOrderCount(response.data.count);
       } catch (err) {
         console.error('Error fetching order count:', err);
