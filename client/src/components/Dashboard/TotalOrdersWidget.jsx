@@ -1,4 +1,4 @@
-// Example: TotalOrdersWidget.jsx
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
@@ -9,7 +9,7 @@ const TotalOrdersWidget = ({ range }) => {
     useEffect(() => {
         const fetchTotalOrders = async () => {
             try {
-                const response = await axios.get(`http://localhost:8090/api/orders/total?range=${range}`);
+                const response = await axios.get(`https://smart-inventory-management-api.onrender.com/api/orders/total?range=${range}`);
                 setTotalOrders(response.data.total);
             } catch (err) {
                 console.error('Failed to fetch total orders:', err);
