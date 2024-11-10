@@ -21,7 +21,7 @@ const Item = require('./models/items');
 const recipeRoutes = require('./routes/recipes')
 const managerRawMaterialRequestsRoutes = require('./routes/managerRawMaterialRequest'); 
 const rawMaterialRequestsRoutes = require('./routes/rawMaterialRequests'); 
-
+const allowedOrigins = ['http://localhost:3000', 'https://smart-inventory-management.vercel.app'];
 //database connection
 connection();
 
@@ -50,9 +50,15 @@ app.use('/api/sales', salesRoutes);
 app.use('/api/rawMaterials', rawMaterialsRoutes);
 app.use('/api/mostSoldItem', mostSoldItemRoutes);
 app.use(cors({
-  origin: 'http://localhost:3000', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  credentials: true, 
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
 // Routes
