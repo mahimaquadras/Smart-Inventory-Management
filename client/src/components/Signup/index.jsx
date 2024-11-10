@@ -21,7 +21,7 @@ const Signup = () => {
     const handleSubmit = async(e) => {
         e.preventDefault();
         try {
-            const url = "http://localhost:8090/api/users";
+            const url = "https://smart-inventory-management-api.onrender.com/api/users";
             const {data:res} = await axios.post(url,data);
             if (data.role === "Chef") {
                 navigate("/chef-dashboard"); 
