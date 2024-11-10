@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './styles.module.css'; // Import your CSS module
+import styles from './styles.module.css'; 
 
 const FinishedProductsList = () => {
   const [products, setProducts] = useState([]);
@@ -10,7 +10,7 @@ const FinishedProductsList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/finished-products');
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/finished-products');
         setProducts(res.data);
         checkLowStock(res.data);
       } catch (err) {
