@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend } from 'chart.js';
 import { PieChart, Pie, Cell, Tooltip as PieTooltip, Legend as PieLegend } from 'recharts';
-import styles from './Dashboard.module.css'; // Import your CSS module
+import styles from './Dashboard.module.css';
 import ProductList from './FinishedProductList';
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
@@ -23,11 +23,11 @@ const Dashboard = () => {
     const fetchData = async () => {
       try {
         const [customersRes, salesRes, salesDataRes, pieDataRes, finishedProductsRes] = await Promise.all([
-          axios.get('http://localhost:8090/api/customers/total'),
-          axios.get('http://localhost:8090/api/sales/summary'),
-          axios.get('http://localhost:8090/api/sales/data'),
-          axios.get('http://localhost:8090/api/sales/pie'),
-          axios.get('http://localhost:8090/api/finished-products'),
+          axios.get('https://smart-inventory-management-api.onrender.com/api/customers/total'),
+          axios.get('https://smart-inventory-management-api.onrender.com/api/sales/summary'),
+          axios.get('https://smart-inventory-management-api.onrender.com/api/sales/data'),
+          axios.get('https://smart-inventory-management-api.onrender.com/api/sales/pie'),
+          axios.get('https://smart-inventory-management-api.onrender.com/api/finished-products'),
         ]);
 
         setWidgets({
@@ -41,7 +41,7 @@ const Dashboard = () => {
         setPieChartData(pieDataRes.data || []);
         setFinishedProducts(finishedProductsRes.data || []);
 
-        // Trigger pop-up for products with quantity 0
+        
         finishedProductsRes.data.forEach(product => {
           if (product.qntyAvailable === 0) {
             alert(`${product.itemName} is out of stock! Prepare more.`);
