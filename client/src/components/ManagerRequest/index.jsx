@@ -1,4 +1,4 @@
-// src/pages/ManagerDashboard.js
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './styles.module.css';
@@ -15,7 +15,7 @@ const ManagerRequest = () => {
        
         const fetchRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:8090/api/manager/managerRequest');
+                const response = await axios.get('https://smart-inventory-management-api.onrender.com/api/manager/managerRequest');
                 setRequests(response.data.requests);
             } catch (err) {
                 console.error('Error fetching raw material requests:', err);
@@ -35,7 +35,7 @@ const ManagerRequest = () => {
 
         try {
             const managerName = 'Manager'; 
-            const response = await axios.put(`http://localhost:8090/api/manager/managerRequest/${id}/approve`, { managerName });
+            const response = await axios.put(`https://smart-inventory-management-api.onrender.com/api/manager/managerRequest/${id}/approve`, { managerName });
             setSuccess('Request approved successfully.');
 
            
@@ -55,7 +55,7 @@ const ManagerRequest = () => {
 
         try {
             const managerName = 'Manager'; 
-            const response = await axios.put(`http://localhost:8090/api/manager/managerRequest/${id}/reject`, { managerName });
+            const response = await axios.put(`https://smart-inventory-management-api.onrender.com/api/manager/managerRequest/${id}/reject`, { managerName });
             setSuccess('Request rejected successfully.');
 
            
