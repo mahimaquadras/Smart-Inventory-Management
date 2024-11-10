@@ -24,7 +24,7 @@ const RawMaterialForm = () => {
   useEffect(() => {
     const fetchRawMaterials = async () => {
       try {
-        const res = await axios.get('http://localhost:8090/api/rawMaterial');
+        const res = await axios.get('https://smart-inventory-management-api.onrender.com/api/rawMaterial');
         setRawMaterialList(res.data);
       } catch (err) {
         setError('Failed to fetch raw materials');
@@ -36,7 +36,7 @@ const RawMaterialForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8090/api/rawMaterial', {
+      const response = await axios.post('https://smart-inventory-management-api.onrender.com/api/rawMaterial', {
         name: selectedMaterial,
         quantity: parseFloat(quantity),
         pricePerKg: parseFloat(pricePerKg)
