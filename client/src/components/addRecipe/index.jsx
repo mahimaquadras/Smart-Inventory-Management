@@ -48,7 +48,7 @@ const AddRecipe = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8090/api/recipes', {
+            const response = await fetch('https://smart-inventory-management-api.onrender.com/api/recipes', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
